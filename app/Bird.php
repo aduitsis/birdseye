@@ -134,7 +134,10 @@ class Bird
 
 
     public function routesTable( $table ) {
-        $routesBlob = $this->run('show route table ' . $table . ' all');
+	$protocol = substr_replace($table,"b",0,1);
+	#dd( $protocol );
+        $routesBlob = $this->run('show route table ' . $table . ' all protocol '.$protocol);
+	#dd( $routesBlob );
 
         return ( new RoutesParser($routesBlob ) )->parse();
     }
